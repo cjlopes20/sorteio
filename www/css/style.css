@@ -1,0 +1,35 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+@font-face {
+
+    font-family: "Lobster";
+    src: url("../font/Lobster-Regular.ttf") format("truetype");
+
+}
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+	font-size: inherit;
+}
+input{
+    text-align: center;
+    font-size: larger;
+}
+h1{
+    font-family: 'Lobster', cursive;
+
+}
+p{
+    font-family: 'Lobster', cursive;
+}
+h4{
+    font-family: sans-serif ;
+}

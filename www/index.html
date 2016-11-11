@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Sorteio - Safety World</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="font/Lobster-Regular.ttf" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<!-- phonegap -->
+
+	<meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+
+</head>
+<body>
+    <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <br/><br/>
+      <div class="row">
+        <div class="col m6 l4 s10 offset-s1 offset-m3 offset-l4">
+          <img class="responsive-img" src="img/logo.png"/>
+        </div>
+      </div>
+      <br/>
+      <h1 class="header center blue-text darken-3-text">Sorteio</h1>
+      <div class="row center">
+        <h5 class="header col s12 light">Insira o valor inicial e final para realizar o sorteio!</h5>
+      </div>
+
+      <div class="row">
+        <div class="col m2 s8 offset-m4 offset-s2">
+          <input placeholder="Valor Inicial" id="num_de" type="number" class="validate text-center">
+        </div>
+        <div class="col m2 s8 offset-s2">
+          <input placeholder="Valor Final" id="num_ate" type="number" class="validate text-center">
+        </div>
+      </div>
+
+      <div class="row center">
+        <a id="download-button" class="btn-large waves-effect waves-light blue" onclick="sorteio()">Sortear</a>
+      </div>
+    </div>
+  </div>
+    <!-- Modal Structure -->
+    <div id="sorteioMod" class="modal">
+      <div class="modal-content">
+        <h4 class="center-align">Resultado!</h4>
+        <h1 class="header center blue-text large" id="demo"></h1>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Fechar</a>
+      </div>
+    </div>
+
+<!-- Script phonegap -->
+
+<script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">
+        app.initialize();
+    </script>
+	
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+
+  <script>
+
+    function sorteio() {
+
+      var num_de = parseInt(document.getElementById("num_de").value);
+      var final = parseInt(document.getElementById("num_ate").value);
+
+    if(num_de >= 0 && final >= 1 ){
+        if(num_de > final){
+          var $toastContent = $('<span>O valor inicial é maior que o final!</span>');
+          Materialize.toast($toastContent, 5000);
+        }else{
+          var x = document.getElementById("demo")
+          var math = (Math.random() * final);
+          var mathxx = Math.floor(math + num_de);
+
+          if(mathxx <= final && mathxx >= num_de){
+            x.innerHTML = mathxx;
+            openMod();
+          }else if(mathxx < num_de){
+            x.innerHTML = num_de;
+            openMod();
+          }else {
+            x.innerHTML = final;
+            openMod();
+          }
+        }
+      console.log(x);
+        console.log(num_de);
+        console.log(final);
+        console.log(math);
+        console.log(mathxx);
+      }else{
+      var $toastContent = $('<span>Insira valores válidos para o Sorteio!</span>');
+      Materialize.toast($toastContent, 5000);
+    }
+    }
+
+    function openMod(){
+      $('.modal-trigger').leanModal({
+                dismissible: false, // Modal can be dismissed by clicking outside of the modal
+                opacity: .5, // Opacity of modal background
+                in_duration: 300, // Transition in duration
+                out_duration: 200// Transition out duration
+              }
+      );
+      $('#sorteioMod').openModal();
+    }
+
+  </script>
+  
+
+  </body>
+</html>
